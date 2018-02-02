@@ -1,0 +1,87 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="jumbotron main-promotion">
+            <h2 class="main-promotion__title">@Model.MainPromotion.Title</h2>
+            <p class="main-promotion__description">@Model.MainPromotion.Description</p>
+            <p class="main-promotion__timestamp">@Model.MainPromotion.GeneratedTimestamp.ToString()</p>
+        </div>  
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="@(Model.PromoApiFaulted ? "col-sm-12" : "col-sm-8")">
+        @if (Model.MerchantApiFaulted) {
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>Merchant API is down so here is some other cool content</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>Merchant API is down so here is some other cool content</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>Merchant API is down so here is some other cool content</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>Merchant API is down so here is some other cool content</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var merchant in Model.Merchants) {
+                <div class="panel panel-default merchant">
+                    <div class="panel-heading merchant__name">@merchant.Name</div>
+                    <div class="panel-body">
+                        <p class="merchant__description">@merchant.Description</p>
+                        <p class="merchant__timestamp">@merchant.GeneratedTimestamp.ToString()</p>
+                    </div>
+                </div>
+            }
+        
+        }
+    </div>
+    @if (!Model.PromoApiFaulted) {
+        <div class="col-sm-4">
+            <div class="side-promotion panel">
+                <div class="panel-body">
+                    <h2 class="side-promotion__title">@Model.SidePromotionOne.Title</h2>
+                    <p class="side-promotion__description">@Model.SidePromotionOne.Description</p>
+                    <p class="side-promotion__timestamp">@Model.SidePromotionOne.GeneratedTimestamp.ToString()</p>
+                </div>
+            </div> 
+
+            <div class="side-promotion panel">
+                <div class="panel-body">
+                    <h2 class="side-promotion__title">@Model.SidePromotionTwo.Title</h2>
+                    <p class="side-promotion__description">@Model.SidePromotionTwo.Description</p>
+                    <p class="side-promotion__timestamp">@Model.SidePromotionTwo.GeneratedTimestamp.ToString()</p>
+                </div>
+            </div> 
+        </div>
+    }
+</div>
+
